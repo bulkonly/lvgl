@@ -22,7 +22,6 @@ file(GLOB_RECURSE SOURCES ${LVGL_ROOT_DIR}/src/*.c ${LVGL_ROOT_DIR}/src/*.S)
 file(GLOB_RECURSE EXAMPLE_SOURCES ${LVGL_ROOT_DIR}/examples/*.c)
 file(GLOB_RECURSE DEMO_SOURCES ${LVGL_ROOT_DIR}/demos/*.c)
 file(GLOB_RECURSE THORVG_SOURCES ${LVGL_ROOT_DIR}/src/libs/thorvg/*.cpp ${LVGL_ROOT_DIR}/src/others/vg_lite_tvg/*.cpp)
-file(GLOB_RECURSE PAGES_SOURCES ${LVGL_ROOT_DIR}/../pages/*.c ${LVGL_ROOT_DIR}/../utilities/*.c ${LVGL_ROOT_DIR}/../lv_ctrls/*.c ${LVGL_ROOT_DIR}/../services/*/*.c)
 
 # Build LVGL library
 add_library(lvgl ${SOURCES})
@@ -73,15 +72,6 @@ if(NOT LV_CONF_BUILD_DISABLE_DEMOS)
 
     target_include_directories(lvgl_demos SYSTEM PUBLIC ${LVGL_ROOT_DIR}/demos)
     target_link_libraries(lvgl_demos PUBLIC lvgl)
-endif()
-
-# Build LVGL demos library
-if(NOT LV_CONF_BUILD_DISABLE_PAGES)
-    add_library(lvgl_pages ${PAGES_SOURCES})
-    add_library(lvgl::pages ALIAS lvgl_pages)
-
-    target_include_directories(lvgl_pages SYSTEM PUBLIC ${LVGL_ROOT_DIR}/../pages)
-    target_link_libraries(lvgl_pages PUBLIC lvgl)
 endif()
 
 # Library and headers can be installed to system using make install
@@ -221,24 +211,6 @@ if(NOT LV_CONF_BUILD_DISABLE_EXAMPLES)
 
   install(
     TARGETS lvgl_examples
-    ARCHIVE DESTINATION "${LIB_INSTALL_DIR}"
-    LIBRARY DESTINATION "${LIB_INSTALL_DIR}"
-    RUNTIME DESTINATION "${RUNTIME_INSTALL_DIR}"
-    PUBLIC_HEADER DESTINATION "${INC_INSTALL_DIR}")
-endif()
-
-#install pages
-if(NOT LV_CONF_BUILD_DISABLE_PAGES)
-  set_target_properties(
-    lvgl_pages
-    PROPERTIES OUTPUT_NAME lvgl_pages
-               ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
-               LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
-               RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-               PUBLIC_HEADER "${LVGL_PUBLIC_HEADERS}")
-
-  install(
-    TARGETS lvgl_pages
     ARCHIVE DESTINATION "${LIB_INSTALL_DIR}"
     LIBRARY DESTINATION "${LIB_INSTALL_DIR}"
     RUNTIME DESTINATION "${RUNTIME_INSTALL_DIR}"
