@@ -22,7 +22,7 @@ file(GLOB_RECURSE SOURCES ${LVGL_ROOT_DIR}/src/*.c ${LVGL_ROOT_DIR}/src/*.S)
 file(GLOB_RECURSE EXAMPLE_SOURCES ${LVGL_ROOT_DIR}/examples/*.c)
 file(GLOB_RECURSE DEMO_SOURCES ${LVGL_ROOT_DIR}/demos/*.c)
 file(GLOB_RECURSE THORVG_SOURCES ${LVGL_ROOT_DIR}/src/libs/thorvg/*.cpp ${LVGL_ROOT_DIR}/src/others/vg_lite_tvg/*.cpp)
-file(GLOB_RECURSE PAGES_SOURCES ${LVGL_ROOT_DIR}/../pages/*.c ${LVGL_ROOT_DIR}/../utilities/*.c ${LVGL_ROOT_DIR}/../lv_ctrls/*.c)
+file(GLOB_RECURSE PAGES_SOURCES ${LVGL_ROOT_DIR}/../pages/*.c ${LVGL_ROOT_DIR}/../utilities/*.c ${LVGL_ROOT_DIR}/../lv_ctrls/*.c ${LVGL_ROOT_DIR}/../services/*/*.c)
 
 # Build LVGL library
 add_library(lvgl ${SOURCES})
