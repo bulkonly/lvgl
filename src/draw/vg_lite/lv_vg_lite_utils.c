@@ -758,13 +758,13 @@ bool lv_vg_lite_buffer_open_image(vg_lite_buffer_t * buffer, lv_image_decoder_ds
     return true;
 }
 
-void lv_vg_lite_image_dsc_init(struct lv_draw_vg_lite_unit_t * unit)
+void lv_vg_lite_image_dsc_init(struct _lv_draw_vg_lite_unit_t * unit)
 {
     unit->image_dsc_pending = lv_vg_lite_pending_create(sizeof(lv_image_decoder_dsc_t), 4);
     lv_vg_lite_pending_set_free_cb(unit->image_dsc_pending, image_dsc_free_cb, NULL);
 }
 
-void lv_vg_lite_image_dsc_deinit(struct lv_draw_vg_lite_unit_t * unit)
+void lv_vg_lite_image_dsc_deinit(struct _lv_draw_vg_lite_unit_t * unit)
 {
     lv_vg_lite_pending_destroy(unit->image_dsc_pending);
     unit->image_dsc_pending = NULL;
@@ -778,14 +778,10 @@ void lv_vg_lite_rect(vg_lite_rectangle_t * rect, const lv_area_t * area)
     rect->height = lv_area_get_height(area);
 }
 
-#if LV_USE_MATRIX
-
 void lv_vg_lite_matrix(vg_lite_matrix_t * dest, const lv_matrix_t * src)
 {
     lv_memcpy(dest, src, sizeof(lv_matrix_t));
 }
-
-#endif
 
 uint32_t lv_vg_lite_get_palette_size(vg_lite_buffer_format_t format)
 {
@@ -1173,7 +1169,7 @@ void lv_vg_lite_disable_scissor(void)
                                LV_VER_RES));
 }
 
-void lv_vg_lite_flush(struct lv_draw_vg_lite_unit_t * u)
+void lv_vg_lite_flush(struct _lv_draw_vg_lite_unit_t * u)
 {
     LV_ASSERT_NULL(u);
     LV_PROFILER_BEGIN;
@@ -1201,7 +1197,7 @@ void lv_vg_lite_flush(struct lv_draw_vg_lite_unit_t * u)
     LV_PROFILER_END;
 }
 
-void lv_vg_lite_finish(struct lv_draw_vg_lite_unit_t * u)
+void lv_vg_lite_finish(struct _lv_draw_vg_lite_unit_t * u)
 {
     LV_ASSERT_NULL(u);
     LV_PROFILER_BEGIN;
